@@ -130,6 +130,7 @@ public class TestClass {
     }
 
     @Test
+    @Order(1)
     @Tag("cart")
     public void testCart() {
         test = extent.createTest("testCart", "Test adding and removing items from the cart");
@@ -162,6 +163,7 @@ public class TestClass {
         assertEquals("Add to cart", addToCartBikeLightAfterRemoval.getText(), "Add to Cart button not found for Sauce Labs Bike Light.");
     }
     @Test
+    @Order(2)
     @Tag("checkout")
     public void CheckOutTest() {
         test = extent.createTest("CheckOutTest", "Test the checkout process");
@@ -201,6 +203,7 @@ public class TestClass {
         System.out.println("Both items were successfully removed from the cart.");
     }
     @Test
+    @Order(3)
     @Tag("productDetails")
     public void ProductDetailsPageTest() throws InterruptedException {
         test = extent.createTest("ProductDetailsPageTest", "Test viewing product details");
@@ -268,6 +271,7 @@ public class TestClass {
 
 
     @Test
+    @Order(4)
     @Tag("Buyitems")
 
     public void BuyItemsTest() throws InterruptedException {
@@ -340,7 +344,8 @@ public class TestClass {
 
 
     @Test
-    @Tag("sort")
+    @Order(5)
+    @Tag("Cart_Persistence")
     public void Cart_Persistence() throws InterruptedException {
         test = extent.createTest("Cart_Persistence", "Test Cart_Persistence functionality");
 
@@ -398,6 +403,8 @@ public class TestClass {
         assertEquals("2", cartBadgeText, "Cart does not retain items after re-login.");
     }
     @Test
+    @Order(6)
+    @Tag("sort")
     void SortingOfProducts() throws InterruptedException {
         test = extent.createTest("SortingOfProducts", "Test product sorting functionality");
 
@@ -490,13 +497,16 @@ public class TestClass {
     }
 
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, InterruptedException {
         TestClass test = new TestClass();
 
            test.setup();
             test.testCart();
-
+            test.CheckOutTest();
             test.tearDown();
-
+            test.ProductDetailsPageTest();
+            test.BuyItemsTest();
+            test.Cart_Persistence();
+            test.SortingOfProducts();
         }
 }
